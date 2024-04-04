@@ -1,20 +1,14 @@
-# from urllib.request import urlopen
-# from bs4 import BeautifulSoup
-
-# page = urlopen("https://www.footballdatabase.eu/es/")
-# soup = BeautifulSoup(page,"html.parser")
-# print(soup.hi)
-
 
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd 
-from lxml import etree
-url = "https://www.footballdatabase.eu/es/"
+
+url = "https://footystats.org/es/download-stats-csv"
 r = requests.get(url)
+# soup = BeautifulSoup(r.content, "html.parcer") error C a S
 soup = BeautifulSoup(r.content, "html.parser")
+# texto = soup.text 
+# print(texto)
 
-solotexto = soup.text
-print(solotexto)
-
-
+soup.find_all("a", class_="/c-dl.php?type=players&amp;comp=10032")
+soup
+# <a class="dBlock w80 m0Auto rpl0 rpr0 bbox button-regular-blue white hov8" href="/c-dl.php?type=players&amp;comp=10032" target="_blank"><i class="mr03 fa fa-user-circle"></i><br class="sm-visible"><span class="sm-invisible">CSV</span> de Jugador</a> 
