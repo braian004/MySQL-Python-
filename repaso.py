@@ -1,9 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-
-url ="https://python.org/"
+url ="https://postimg.cc/gallery/tPCSH2M"
 page = requests.get(url)
 soup = BeautifulSoup(page.content , "html.parser")
-
-texto=soup.text
-print(texto)
+imagen=soup.select("img")
+print(imagen)
