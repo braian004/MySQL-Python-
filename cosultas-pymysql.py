@@ -12,7 +12,7 @@
 # cursorObject = dataBase.cursor()
   
 # # creating table 
-# studentRecord = """CREATE TABLE jugado (
+# studentRecord = """CREATE TABLE juga (
 #                    NAME  VARCHAR(20) NOT NULL,
 #                    BRANCH VARCHAR(50),
 #                    ROLL INT NOT NULL,
@@ -23,7 +23,8 @@
 # insertdata = """ INSERT INTO jugadores (NAME, BRANCH, ROLL, SECTION, AGE)
 #     VALUES ('pepe', 'lo', 12, '33', 25),
 #     ('ronaldo', 'lo', 12, '33', 25),
-#     ('messi', 'lo', 12, '33', 25)
+#     ('messi', 'lo', 12, '33', 25),
+#     ('Neymar', 'lo', 12, '33', 25)
 #     """
 
 # # table created
@@ -51,7 +52,7 @@ try:
 
     # Crear la tabla si no existe
     crear_tabla_query = """
-    CREATE TABLE IF NOT EXISTS jugado (
+    CREATE TABLE IF NOT EXISTS jugadodores (
         NAME VARCHAR(20) NOT NULL,
         BRANCH VARCHAR(50),
         ROLL INT NOT NULL,
