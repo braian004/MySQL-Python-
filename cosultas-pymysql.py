@@ -1,84 +1,41 @@
-
-# import pymysql
-
-# dataBase = pymysql.connect(
-# host='127.0.0.1', 
-# user='root',  
-# password = "tito", 
-# database = "importdata"
-# )
-
-# # print(dataBase)
-# cursorObject = dataBase.cursor()
-  
-# # creating table 
-# studentRecord = """CREATE TABLE juga (
-#                    NAME  VARCHAR(20) NOT NULL,
-#                    BRANCH VARCHAR(50),
-#                    ROLL INT NOT NULL,
-#                    SECTION VARCHAR(5),
-#                    AGE INT
-#                    )"""
-
-# insertdata = """ INSERT INTO jugadores (NAME, BRANCH, ROLL, SECTION, AGE)
-#     VALUES ('pepe', 'lo', 12, '33', 25),
-#     ('ronaldo', 'lo', 12, '33', 25),
-#     ('messi', 'lo', 12, '33', 25),
-#     ('Neymar', 'lo', 12, '33', 25)
-#     """
-
-# # table created
-# cursorObject.execute(insertdata) 
-
-# # disconnecting from server
-# dataBase.close()
-
 import pymysql
 
-# Parámetros de conexión
-params = {
-    'host': '127.0.0.1',
-    'user': 'root',
-    'password': 'tito',
-    'database': 'importdata'
-}
+# Establecer conexión con la base de datos
+dataBase = pymysql.connect(
+    host='127.0.0.1',
+    user='root',
+    password='tito',
+    database='importdata'
+)
 
-try:
-    # Establecer la conexión con la base de datos
-    conexion = pymysql.connect(**params)
+# Crear un objeto cursor para ejecutar consultas
+cursorObject = dataBase.cursor()
 
-    # Crear un cursor para ejecutar consultas SQL
-    cursor = conexion.cursor()
+# Crear la tabla
+studentRecord = """CREATE TABLE juga (
+                   NAME  VARCHAR(20) NOT NULL,
+                   BRANCH VARCHAR(50),
+                   ROLL INT NOT NULL,
+                   SECTION VARCHAR(5),
+                   AGE INT
+                   )"""
 
-    # Crear la tabla si no existe
-    crear_tabla_query = """
-    CREATE TABLE IF NOT EXISTS jugadodores (
-        NAME VARCHAR(20) NOT NULL,
-        BRANCH VARCHAR(50),
-        ROLL INT NOT NULL,
-        SECTION VARCHAR(5),
-        AGE INT
-    )
-    """
-    cursor.execute(crear_tabla_query)
-
-    # Insertar datos en la tabla
-    insertar_datos_query = """ INSERT INTO jugadores (NAME, BRANCH, ROLL, SECTION, AGE)
+# Insertar datos en la tabla
+insertdata = """INSERT INTO juga (NAME, BRANCH, ROLL, SECTION, AGE)
     VALUES ('pepe', 'lo', 12, '33', 25),
     ('ronaldo', 'lo', 12, '33', 25),
-    ('messi', 'lo', 12, '33', 25)
+    ('messi', 'lo', 12, '33', 25),
+    ('Neymar', 'lo', 12, '33', 25)
     """
-    cursor.execute(insertar_datos_query)
 
-    # Confirmar los cambios
-    conexion.commit()
+# Ejecutar la consulta para crear la tabla
+cursorObject.execute(studentRecord)
 
-    # Cerrar el cursor y la conexión
-    cursor.close()
-    conexion.close()
+# Ejecutar la consulta para insertar datos
+cursorObject.execute(insertdata)
 
-    print("Datos insertados correctamente.")
+# Hacer commit para guardar los cambios
+dataBase.commit()
 
-except pymysql.Error as e:
-    # Si ocurre algún error, mostramos el mensaje de error
-    print(f"Error al conectar a la base de datos: {e}")
+# Desconectar de la base de datos
+dataBase.close()
