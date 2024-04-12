@@ -1,41 +1,44 @@
-import pymysql
-
-# Establecer conexión con la base de datos
-dataBase = pymysql.connect(
+import mysql.connector
+import pandas as pd
+dataBase = mysql.connector.connect(
     host='127.0.0.1',
-    user='root',
+    user = 'root',
     password='tito',
     database='importdata'
 )
+print(dataBase)
 
-# Crear un objeto cursor para ejecutar consultas
-cursorObject = dataBase.cursor()
+cursor = dataBase.cursor()
+sentencia_sql = "DROP TABLE IF EXISTS juga"
 
-# Crear la tabla
-studentRecord = """CREATE TABLE juga (
-                   NAME  VARCHAR(20) NOT NULL,
-                   BRANCH VARCHAR(50),
-                   ROLL INT NOT NULL,
-                   SECTION VARCHAR(5),
-                   AGE INT
-                   )"""
+# Ejecutar la sentencia
+cursor.execute(sentencia_sql)
 
-# Insertar datos en la tabla
-insertdata = """INSERT INTO juga (NAME, BRANCH, ROLL, SECTION, AGE)
-    VALUES ('pepe', 'lo', 12, '33', 25),
-    ('ronaldo', 'lo', 12, '33', 25),
-    ('messi', 'lo', 12, '33', 25),
-    ('Neymar', 'lo', 12, '33', 25)
-    """
+# Obtener todos los resultados
+resultados = cursor.fetchall()
 
-# Ejecutar la consulta para crear la tabla
-cursorObject.execute(studentRecord)
+# Imprimir los resultados
+for fila in resultados:
+    print(fila)
 
-# Ejecutar la consulta para insertar datos
-cursorObject.execute(insertdata)
-
-# Hacer commit para guardar los cambios
-dataBase.commit()
-
-# Desconectar de la base de datos
+# Cerrar cursor y conexión
+cursor.close()
 dataBase.close()
+# import pymysql
+
+# # Establecer conexión con la base de datos
+# dataBase = pymysql.connect(
+#     host='127.0.0.1',
+#     user='root',
+#     password='tito',
+#     database='importdata'
+# )
+
+# # Crear un objeto cursor para ejecutar consultas
+# cursorObject = dataBase.cursor()
+
+# selectfrom = """SELECT*FROM Players_description"""
+# cursorObject.execute(selectfrom)
+# dataBase.commit()
+# dataBase.close()
+
