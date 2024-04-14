@@ -55,3 +55,16 @@ SELECT Team_position,MAX(Height)FROM Players_description
 GROUP BY Team_position;
 
 -- HA
+USE importdata;
+SELECT * FROM PLayers_description;
+SELECT Firstname,Age,MAX(Value_eur) FROM Players_description
+WHERE Age < 25 
+GROUP BY Firstname,Age;
+
+SELECT Nationality,Age FROM Players_description
+WHERE Age < 30 AND Nationality = "ARG";
+
+SELECT*FROM Players_description;
+SELECT Firstname,BirthDate FROM Players_description
+WHERE BirthDate > 1990-00-00;
+
