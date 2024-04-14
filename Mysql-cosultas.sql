@@ -68,3 +68,6 @@ SELECT*FROM Players_description;
 SELECT Firstname,BirthDate FROM Players_description
 WHERE BirthDate > 1990-00-00;
 
+SELECT Club,MAX(Value_eur) FROM PLayers_description
+GROUP BY Club;
+
