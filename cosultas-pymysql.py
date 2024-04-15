@@ -26,6 +26,8 @@ df.columns = ["id", "firstName","LastName","Edad","Nacimiento","altura","peso","
 print(df)
 #guardar en un data frame en cv
 df.to_csv('datos.csv', index=False)
+# guardar como json
+df.to_json('datos.json', orient='records', lines=True)#muchas sola line-->True y False --> una sola line
 # Cerrar cursor y conexión
 cursor.close()
 dataBase.close()
