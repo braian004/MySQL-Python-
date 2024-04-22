@@ -46,7 +46,7 @@ WHERE Nationality IN('ARG','BRA','FRA');
 SELECT Nationality, AVG(Height) FROM players_description
 WHERE Age > 28
 GROUP BY Nationality
-ORDER BY AVG(Height);
+ORDER BY AVG(Height);-- AVG promedio 
 -- el jugadores que menos gana por nacionalidad
 SELECT Nationality,MIN(Value_eur) FROM Players_description
 GROUP BY Nationality;
@@ -70,4 +70,9 @@ WHERE BirthDate > 1990-00-00;
 
 SELECT Club,MAX(Value_eur) FROM PLayers_description
 GROUP BY Club;
+
+SELECT Nationality,AVG(Height)FROM palyers_description
+WHERE Age > 28
+GROUP BY Nationality 
+ORDER BY(Height);
 
