@@ -50,29 +50,24 @@ ORDER BY AVG(Height);-- AVG promedio
 -- el jugadores que menos gana por nacionalidad
 SELECT Nationality,MIN(Value_eur) FROM Players_description
 GROUP BY Nationality;
-
+-- MAX
+SELECT Nationality ,MAX(Height) FROM Players_description
+GROUP BY Nationality;
+-- maximos de height por posicion 
 SELECT Team_position,MAX(Height)FROM Players_description
 GROUP BY Team_position;
 
--- HA
-USE importdata;
-SELECT * FROM PLayers_description;
-SELECT Firstname,Age,MAX(Value_eur) FROM Players_description
-WHERE Age < 25 
-GROUP BY Firstname,Age;
+-- HAVING anlgo similar a la where,el where se aplica solo row individual
 
-SELECT Nationality,Age FROM Players_description
-WHERE Age < 30 AND Nationality = "ARG";
+SELECT Nationality,AVG(Value_eur) FROM players_description
+WHERE Nationality IN ('ARG','BRA','ESP','FRA')
+GROUP BY Nationality
+HAVING AVG (Value_eur);
 
-SELECT*FROM Players_description;
-SELECT Firstname,BirthDate FROM Players_description
-WHERE BirthDate > 1990-00-00;
-
-SELECT Club,MAX(Value_eur) FROM PLayers_description
-GROUP BY Club;
-
-SELECT Nationality,AVG(Height)FROM palyers_description
-WHERE Age > 28
+-- DISTINCT
+SELECT DISTINCT Nationality,COUNT(*) FROM players_description
 GROUP BY Nationality 
-ORDER BY(Height);
+ORDER BY COUNT(*)ASC;
+
+-- CREAT TEMPORARY TABLE 
 
