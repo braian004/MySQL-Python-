@@ -70,4 +70,15 @@ GROUP BY Nationality
 ORDER BY COUNT(*)ASC;
 
 -- CREAT TEMPORARY TABLE 
+SELECT*FROM bank;
+CREATE TEMPORARY TABLE temporal_tabla
+SELECT job,education,age
+FROM bank;
+SELECT*FROM temporal_tabla;
+-- crear tabla termporal de edad superior a 25 y education sean terciario y desconocida
+CREATE TEMPORARY TABLE temporal
+SELECT age,education,job,marital
+FROM bank
+WHERE age > 25 AND education IN ('tertiary' , 'primary');
 
+SELECT*FROM temporal;
