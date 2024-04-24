@@ -82,3 +82,18 @@ FROM bank
 WHERE age > 25 AND education IN ('tertiary' , 'primary');
 
 SELECT*FROM temporal;
+
+-- Informacion  of thw table
+SHOW COLUMNS FROM clientes;
+SELECT * FROM clientes;
+SELECT * FROM productos;
+-- INNER JOIN
+SELECT clientes.customerId, clientes.surname, clientes.geography, 
+clientes.gender, 
+clientes.HasCrCard, clientes.isActiveMember, 
+clientes.estimatedSalary, clientes.application_date, 
+clientes.exit_date, clientes.birth_date,
+productos.Products
+FROM clientes
+INNER JOIN productos
+ON clientes.customerId = productos.customerId;
