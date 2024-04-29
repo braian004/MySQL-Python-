@@ -103,9 +103,13 @@ SELECT * FROM players_description
 WHERE Age> (SELECT Age FROM players_description WHERE Playerid = 1);
 
 SELECT * FROM clientes;
--- estimatedSalary
+
 SELECT surname,geography,estimatedSalary FROM Clientes
 WHERE estimatedSalary IN (
 		SELECT estimatedSalary FROM clientes
 		WHERE estimatedSalary > 240000);
-        
+SELECT * FROM clientes;
+
+SELECT geography,estimatedSalary FROM clientes
+WHERE estimatedSalary >= (SELECT MAX(estimatedSalary) AS QUERIES FROM Clientes
+WHERE geography = 'France');      
