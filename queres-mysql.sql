@@ -83,7 +83,7 @@ WHERE age > 25 AND education IN ('tertiary' , 'primary');
 
 SELECT*FROM temporal;
 
--- Informacion  of thw table
+-- Informacion  of the table
 SHOW COLUMNS FROM clientes;
 SELECT * FROM clientes;
 SELECT * FROM productos;
@@ -97,3 +97,15 @@ productos.Products
 FROM clientes
 INNER JOIN productos
 ON clientes.customerId = productos.customerId;
+
+-- SUBCONSULTA
+SELECT * FROM players_description
+WHERE Age> (SELECT Age FROM players_description WHERE Playerid = 1);
+
+SELECT * FROM clientes;
+-- estimatedSalary
+SELECT surname,geography,estimatedSalary FROM Clientes
+WHERE estimatedSalary IN (
+		SELECT estimatedSalary FROM clientes
+		WHERE estimatedSalary > 240000);
+        
