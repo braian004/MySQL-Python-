@@ -112,4 +112,26 @@ SELECT * FROM clientes;
 
 SELECT geography,estimatedSalary FROM clientes
 WHERE estimatedSalary >= (SELECT MAX(estimatedSalary) AS QUERIES FROM Clientes
-WHERE geography = 'France');      
+WHERE geography = 'France'); 
+
+USE importdata;
+
+-- SUBCONSULTA
+SELECT * FROM clientes;
+SELECT clientes.geography,clientes.estimatedSalary,t.geography,MEDIA_SALARIO
+FROM clientes 
+INNER JOIN	   (SELECT geography, AVG(estimatedSalary)AS MEDIA_SALARIO
+				FROM clientes
+				WHERE geography IS NOT NULL
+				GROUP BY geography)AS t 
+ON clientes.geography = t.geography
+WHERE clientes.estimatedSalary >= MEDIA_SALARIO;
+
+SELECT * FROM clientes;
+SELECT * FROM productos;
+
+SELECT COUNT(clientes.customerID) AS Clientes_Producto_B 
+FROM clientes
+INNER JOIN productos 
+ON clientes.customerID = productos.customerId 
+WHERE productos.products = 'Productos B';     
