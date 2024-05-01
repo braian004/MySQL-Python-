@@ -130,8 +130,37 @@ WHERE clientes.estimatedSalary >= MEDIA_SALARIO;
 SELECT * FROM clientes;
 SELECT * FROM productos;
 
-SELECT COUNT(clientes.customerID) AS Clientes_Producto_B 
+-- SELECT COUNT(clientes.customerID) AS Clientes_Producto_B 
+-- FROM clientes INNER JOIN productos 
+-- ON clientes.customerID = productos.customerId
+-- WHERE productos.Products = 'Producto B'
+
+-- SELECT surname,birth_date,
+SELECT  
+CASE 
+	WHEN YEAR (birth_date)>= 1930 AND YEAR (birth_date)<=1935 THEN 'GENERACION GERRA'
+    WHEN YEAR (birth_date)>= 1945 AND YEAR (birth_date)<=1950 THEN 'GENERACION 2 GERRA'
+    WHEN YEAR (birth_date)>= 1960 AND YEAR (birth_date)<=1970 THEN 'GENERACION GOLPE DE ESTADO'
+    WHEN YEAR (birth_date)>= 1970 AND YEAR (birth_date)<=2000 THEN 'GENERACION milenial'
+    WHEN YEAR (birth_date)>= 2000 AND YEAR (birth_date)<=2024 THEN 'GENERACION Z'
+    ELSE 'No ahy informacion'
+END AS Generacion,COUNT(*) AS Catidad_X_Generacion
 FROM clientes
-INNER JOIN productos 
-ON clientes.customerID = productos.customerId 
-WHERE productos.products = 'Productos B';     
+GROUP BY Generacion
+ORDER BY Catidad_X_Generacion DESC;
+
+SELECT Generacion, COUNT(*) AS Cantidad_X_Generacion
+FROM (
+    SELECT surname, birth_date,
+        CASE 
+            WHEN YEAR(birth_date) >= 1930 AND YEAR(birth_date) <= 1935 THEN 'GENERACION GERRA'
+            WHEN YEAR(birth_date) >= 1945 AND YEAR(birth_date) <= 1950 THEN 'GENERACION 2 GERRA'
+            WHEN YEAR(birth_date) >= 1960 AND YEAR(birth_date) <= 1970 THEN 'GENERACION GOLPE DE ESTADO'
+            WHEN YEAR(birth_date) >= 1970 AND YEAR(birth_date) <= 2000 THEN 'GENERACION milenial'
+            WHEN YEAR(birth_date) >= 2000 AND YEAR(birth_date) <= 2024 THEN 'GENERACION Z'
+            ELSE 'No hay información'
+        END AS Generacion
+    FROM clientes
+) AS Generations
+GROUP BY Generacion
+ORDER BY Cantidad_X_Generacion DESC;
