@@ -164,3 +164,41 @@ FROM (
 ) AS Generations
 GROUP BY Generacion
 ORDER BY Cantidad_X_Generacion DESC;
+
+-- ALTER TABLE name CHANGE lasna_name LastName  VARCHAR (50) NOT NULL;
+
+SELECT * FROM clientes;
+SELECT * FROM score_crediticio;
+-- carbiar nombre de columna cambiado_name  a customerId 
+ALTER TABLE score_crediticio CHANGE cambiado_name customerId VARCHAR(50) NOT NULL;
+DESCRIBE score_crediticio;
+
+SELECT c.surname,sc.score,
+CASE
+WHEN sc.score <= 579 AND sc.score >= 300 THEN 'Deficiente'
+WHEN sc.score <= 699 AND sc.score >= 580 THEN 'Razonable'
+WHEN sc.score <= 739 AND sc.score >= 670 THEN 'Bueno'
+WHEN sc.score <= 799 AND sc.score >= 740 THEN 'Muy Bueno'
+WHEN sc.score <= 950 AND sc.score >= 800 THEN 'Excepcional'
+WHEN sc.score IS NULL OR sc.score <= 0 THEN 'sin Calificar'
+END AS Calificasion_score
+FROM Clientes as c 
+INNER JOIN score_crediticio AS sc
+ON c.customerID = sc.customerId
+ORDER BY sc.score DESC;
+
+SELECT
+CASE
+WHEN sc.score <= 579 AND sc.score >= 300 THEN 'Deficiente'
+WHEN sc.score <= 699 AND sc.score >= 580 THEN 'Razonable'
+WHEN sc.score <= 739 AND sc.score >= 670 THEN 'Bueno'
+WHEN sc.score <= 799 AND sc.score >= 740 THEN 'Muy Bueno'
+WHEN sc.score <= 950 AND sc.score >= 800 THEN 'Excepcional'
+WHEN sc.score IS NULL OR sc.score <= 0 THEN 'sin Calificar'
+END AS Calificasion_score , COUNT(*) AS cantidad_clasificacion
+FROM clientes as c 
+INNER JOIN score_crediticio AS sc
+ON c.customerID = sc.customerId
+GROUP BY Calificasion_score
+ORDER BY cantidad_clasificacion DESC;
+
