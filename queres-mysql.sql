@@ -202,3 +202,11 @@ ON c.customerID = sc.customerId
 GROUP BY Calificasion_score
 ORDER BY cantidad_clasificacion DESC;
 
+-- DENSE_RANCK()
+-- USE mi_base_de_datos;
+-- RENAME TABLE clientes TO usuarios;
+SELECT * FROM supermarket;
+RENAME TABLE supermarket TO ventas_supermarket;
+SELECT * FROM ventas_supermarket;
+
+SELECT Product_line,AVG(Rating) AS Average_
